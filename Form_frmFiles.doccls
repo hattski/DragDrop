@@ -11,12 +11,14 @@ End Sub
 
 Private Sub Form_Open(Cancel As Integer)
 
+' just a comment
 Me.txtDropbox = "Files hier reinziehen ..."
 
 End Sub
 
 Private Sub Form_Timer()
 
+' another comment
 SaveDropbox Me.txtDropbox
 Me.txtDropbox = "Files hier reinziehen ..."
 Me.TimerInterval = 0
