@@ -1,0 +1,52 @@
+Option Compare Database
+Option Explicit
+
+Private m_AllFiles As String
+
+Private Sub Form_Load()
+
+DragDropInitForm Me.hWnd
+
+End Sub
+
+Private Sub Form_Open(Cancel As Integer)
+
+Me.txtDropbox = "Files hier reinziehen ..."
+
+End Sub
+
+Private Sub Form_Timer()
+
+SaveDropbox Me.txtDropbox
+Me.txtDropbox = "Files hier reinziehen ..."
+Me.TimerInterval = 0
+m_AllFiles = ""
+
+End Sub
+
+Public Sub SaveDropbox(pstrFilelist As String)
+
+Me.txtFilelist = pstrFilelist
+
+End Sub
+
+Public Sub DragDropFiles(FileList As String)
+  
+  If m_AllFiles = "" Then
+    m_AllFiles = FileList
+  Else
+    m_AllFiles = m_AllFiles & ";" & FileList
+  End If
+  
+  m_AllFiles = DragDropRemoveDuplicates(m_AllFiles)
+  
+  Me.txtDropbox = DragDropFormatAs(ReturnLineFormattedString, m_AllFiles)
+  Me.TimerInterval = 500
+  
+End Sub
+
+Private Sub txtDropbox_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+DragDropSetHook True, Me.hWnd
+
+End Sub
