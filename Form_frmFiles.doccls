@@ -11,7 +11,7 @@ End Sub
 
 Private Sub Form_Open(Cancel As Integer)
 
-' just a comment
+' just a better comment
 Me.txtDropbox = "Files hier reinziehen ..."
 
 End Sub
